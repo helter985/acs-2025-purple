@@ -48,15 +48,39 @@ Este documento tiene como objetivo definir el plan de pruebas para la solución 
 - Gestión de pedidos (funcionalidad prevista para una futura aplicación complementaria).
 
 ### 1.3 Definiciones y Roles
-
-- **Vendedor:**\
+- **Vendedor:**  
   Usuario final que consulta la lista de precios a través de un dispositivo móvil.
 
-- **Encargado de Ventas:**\
-  Responsable de actualizar y normalizar las listas de precios recibidas de los proveedores, garantizando la disponibilidad de la última versión.
+- **Administrador del Sistema:**  
+  Encargado de la carga y gestión de las imágenes de los productos y del mantenimiento de la API de actualización. Además, responsable de actualizar y normalizar las listas de precios recibidas de los proveedores, garantizando la disponibilidad de la última versión.
 
-- **Proveedor:**\
-  Entidad que suministra las listas de precios, en su mayoría en formato Excel, con variaciones de formato.
+---
 
-- **Administrador del Sistema:**\
-  Encargado de la carga y gestión de las imágenes de los productos y del mantenimiento de la API de actualización.
+## 2. Requerimientos
+
+### 2.1 Descripción de Roles
+- **Vendedor:**  
+  Consulta el precio de venta de cada artículo usando su dispositivo móvil. Su interacción se limita a la visualización de datos (imagen, nombre, precio y código).
+
+- **Administrador del Sistema:**  
+  Se encarga de integrar las imágenes de los productos en el sistema, ya que estas no vienen en las listas de precios y deben cargarse manualmente. Además, actualiza la base de datos de precios (normalizando las distintas listas de proveedores) y se encarga de ejecutar las actualizaciones, que se realizan entre una y dos veces por semana.
+
+### 2.2 Features por Rol
+
+#### Vendedor
+- **Consulta de Precios:**  
+  - Visualización de la imagen, nombre, precio y código de producto.
+  - Interfaz de usuario sencilla que no requiere capacitación.
+- **Dispositivos:**  
+  - La aplicación estará optimizada para celulares con sistemas Android e iOS.
+
+#### Administrador del Sistema
+- **Carga de Imágenes:**  
+  - Integración de imágenes para cada producto.
+- **Mantenimiento del API:**  
+  - Desarrollo o integración de una API que permita la actualización en tiempo real de los precios.
+- **Actualización y Normalización de Listas:**  
+  - Actualización de listas (1-2 veces por semana) con sincronización en tiempo real.
+  - Gestión de versiones para asegurar que solo se visualice la última lista de precios.
+
+---
