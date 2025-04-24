@@ -1,7 +1,7 @@
 openapi: 3.0.4
 info:
   title: API - Lista de Precios
-  description: API REST para que vendedores consulten precios actualizados de productos y el administrador gestione listas e imágenes.
+  description: API REST para que vendedores consulten productos y precios, y el administrador gestione listas e imágenes.
   version: 1.0.0
 
 servers:
@@ -11,7 +11,7 @@ paths:
   /productos:
     get:
       summary: Obtener todos los productos
-      description: Devuelve una lista de productos con nombre, precio, código e imagen.
+      description: Devuelve una lista de productos con nombre, precio, código e imagen. Se puede aplicar un filtro por nombre.
       parameters:
         - name: nombre
           in: query
@@ -23,13 +23,15 @@ paths:
         - ApiKeyAuth: []
       responses:
         '200':
-          description: Lista de productos
+          description: Lista de productos encontrados
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Producto'
+        '204':
+          description: No se encontraron productos con ese filtro
         '401':
           description: API Key inválida o faltante
         '500':
@@ -42,6 +44,7 @@ paths:
         - name: codigo
           in: path
           required: true
+          description: Código de barras o código interno del producto
           schema:
             type: string
       security:
@@ -53,10 +56,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Producto'
-        '401':
-          description: API Key inválida o faltante
         '404':
           description: Producto no encontrado
+        '401':
+          description: API Key inválida o faltante
 
   /admin/listas-precios:
     post:
