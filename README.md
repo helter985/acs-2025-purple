@@ -184,4 +184,27 @@ Este documento tiene como objetivo definir el plan de pruebas para la solución 
   2. Subir una nueva versión.
   3. Consultar precios desde la app.
   **Resultado esperado:** Solo la última versión está visible para los usuarios.
+
+## 3.2 - Definición de API
+
+La API fue definida utilizando OpenAPI 3.0 y permite realizar las siguientes operaciones:
+
+### Endpoints para Vendedores
+
+- `GET /productos`  
+- `GET /productos/{codigo}`  
+
+🔐 Requiere header: `X-API-KEY`
+
+### Endpoints para Administradores
+
+- `POST /admin/listas-precios` – Subida de listas Excel  
+- `POST /admin/productos/{codigo}/imagen` – Carga de imagen por código  
+
+🔐 Requiere token Bearer JWT en header `Authorization: Bearer <token>`
+
+### Contrato OpenAPI
+
+📄 Archivo disponible en: [`openapi.yaml`](openapi.yaml)
+
 ---
