@@ -189,19 +189,10 @@ Este documento tiene como objetivo definir el plan de pruebas para la solución 
 
 La API fue definida utilizando OpenAPI 3.0 y permite realizar las siguientes operaciones:
 
-### Endpoints para Vendedores
+### Endpoints
 
 - `GET /productos`  
 - `GET /productos/{codigo}`  
-
-🔐 Requiere header: `X-API-KEY`
-
-### Endpoints para Administradores
-
-- `POST /admin/listas-precios` – Subida de listas Excel  
-- `POST /admin/productos/{codigo}/imagen` – Carga de imagen por código  
-
-🔐 Requiere token Bearer JWT en header `Authorization: Bearer <token>`
 
 ### Contrato OpenAPI
 

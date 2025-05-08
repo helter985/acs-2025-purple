@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+.Python
+build/
+utils/config.py
+
+# Doc
+tests/README.md
+BACKEND_README.md
+
+# Entorno
+.venv
+.env
+
+# Imágenes cargadas
+app/static/images/*
+!app/static/images/.gitkeep
+
+# Archivos temporales
+/tmp
+.DS_Store
+.vscode/
+.idea/

@@ -1,7 +1,7 @@
 openapi: 3.0.4
 info:
   title: API - Lista de Precios
-  description: API REST para que vendedores consulten productos y precios, y el administrador gestione listas e imágenes.
+  description: API REST para que vendedores consulten productos y precios.
   version: 1.0.0
 
 servers:
@@ -19,8 +19,6 @@ paths:
           required: false
           schema:
             type: string
-      security:
-        - ApiKeyAuth: []
       responses:
         '200':
           description: Lista de productos encontrados
@@ -32,8 +30,6 @@ paths:
                   $ref: '#/components/schemas/Producto'
         '204':
           description: No se encontraron productos con ese filtro
-        '401':
-          description: API Key inválida o faltante
         '500':
           description: Error interno
 
@@ -47,8 +43,6 @@ paths:
           description: Código de barras o código interno del producto
           schema:
             type: string
-      security:
-        - ApiKeyAuth: []
       responses:
         '200':
           description: Producto encontrado
@@ -58,75 +52,8 @@ paths:
                 $ref: '#/components/schemas/Producto'
         '404':
           description: Producto no encontrado
-        '401':
-          description: API Key inválida o faltante
-
-  /admin/listas-precios:
-    post:
-      summary: Subir nueva lista de precios (solo administrador)
-      description: Permite subir una nueva lista de precios de proveedores en formato Excel para ser procesada.
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                archivo:
-                  type: string
-                  format: binary
-      security:
-        - AdminBearerAuth: []
-      responses:
-        '201':
-          description: Lista de precios cargada exitosamente
-        '400':
-          description: Formato inválido
-        '401':
-          description: Token inválido o no autorizado
-
-  /admin/productos/{codigo}/imagen:
-    post:
-      summary: Cargar imagen de un producto (solo administrador)
-      description: Sube una imagen vinculada al código del producto.
-      parameters:
-        - name: codigo
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                imagen:
-                  type: string
-                  format: binary
-      security:
-        - AdminBearerAuth: []
-      responses:
-        '200':
-          description: Imagen cargada correctamente
-        '404':
-          description: Producto no encontrado
-        '401':
-          description: Token inválido o no autorizado
 
 components:
-  securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      in: header
-      name: X-API-KEY
-
-    AdminBearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-
   schemas:
     Producto:
       type: object
@@ -141,6 +68,3 @@ components:
         imagen:
           type: string
           format: uri
-
-security:
-  - ApiKeyAuth: []
