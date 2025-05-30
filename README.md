@@ -184,6 +184,34 @@ Este documento tiene como objetivo definir el plan de pruebas para la solución 
   2. Subir una nueva versión.
   3. Consultar precios desde la app.
   **Resultado esperado:** Solo la última versión está visible para los usuarios.
+---
+## 3. Especificaciones
+
+### 3.1 Arquitectura
+
+La arquitectura del sistema responde a un modelo **cliente-servidor** con componentes desacoplados, lo que permite mayor **escalabilidad** y **mantenibilidad**.
+
+#### Componentes principales
+
+- **Administrador (MVC)**  
+  El administrador accede a un panel desarrollado bajo el patrón **Modelo-Vista-Controlador (MVC)**. Desde allí puede:  
+  - Cargar listas de precios  
+  - Ejecutar procesos de normalización  
+  - Asociar imágenes a los productos  
+  Este módulo se conecta directamente con la base de datos.
+
+- **API RESTful**  
+  Intermediaria entre el backend y los clientes móviles. Expone **endpoints seguros** que permiten a los vendedores consultar productos y precios en tiempo real.
+
+- **Base de datos**  
+  Contiene los productos, precios y referencias a imágenes. Es accedida tanto por el módulo de administración como por la API.
+
+- **Aplicación del Vendedor**  
+  Interfaz móvil sencilla que permite al vendedor acceder a la información de productos. Se conecta exclusivamente a través de la API para obtener datos actualizados.
+
+> Este enfoque garantiza que los **vendedores accedan siempre a información actualizada**, mientras que las tareas de mantenimiento estén limitadas al administrador.
+
+![Diagrama de Arquitectura](https://lucid.app/publicSegments/view/edc0d672-c7c9-4298-bd47-8efb37299654/image.png)
 
 ## 3.2 - Definición de API
 
