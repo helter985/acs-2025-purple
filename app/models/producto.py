@@ -1,38 +1,45 @@
-from app.models.db import get_db_connection
+from app.models.db import db
 
-class Producto:
+class Producto(db.Model):
+    __tablename__ = 'productos'
     
+    id = db.Column(db.Integer, primary_key=True)
+    codigo = db.Column(db.String(50), unique=True, nullable=False)
+    nombre = db.Column(db.String(200), nullable=False)
+    precio = db.Column(db.Float, nullable=False)
+    imagen_url = db.Column(db.String(255))
+
+    def __init__(self, codigo, nombre, precio, imagen_url=None):
+        if precio < 0:
+            raise ValueError("El precio no puede ser negativo")
+        if not codigo:
+            raise ValueError("El código es requerido")
+        if not nombre:
+            raise ValueError("El nombre es requerido")
+            
+        self.codigo = codigo
+        self.nombre = nombre
+        self.precio = precio
+        self.imagen_url = imagen_url
+
+    def __repr__(self):
+        return f"{self.nombre} ({self.codigo})"
+
+    def to_dict(self):
+        return {
+            'codigo': self.codigo,
+            'nombre': self.nombre,
+            'precio': self.precio,
+            'imagen_url': self.imagen_url
+        }
+
     @staticmethod
     def obtener_todos(nombre=None):
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        
+        query = Producto.query
         if nombre:
-            cursor.execute(
-                "SELECT codigo, nombre, precio, imagen FROM productos WHERE LOWER(nombre) LIKE LOWER(%s)",
-                [f'%{nombre}%']
-            )
-        else:
-            cursor.execute("SELECT codigo, nombre, precio, imagen FROM productos")
-        
-        productos = cursor.fetchall()
-        cursor.close()
-        conn.close()
-        
-        return productos
+            query = query.filter(Producto.nombre.ilike(f'%{nombre}%'))
+        return query.all()
     
     @staticmethod
     def obtener_por_codigo(codigo):
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        
-        cursor.execute(
-            "SELECT codigo, nombre, precio, imagen FROM productos WHERE codigo = %s",
-            [codigo]
-        )
-        
-        producto = cursor.fetchone()
-        cursor.close()
-        conn.close()
-        
-        return producto 
+        return Producto.query.filter_by(codigo=codigo).first() 
