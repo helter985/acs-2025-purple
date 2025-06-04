@@ -11,7 +11,7 @@ paths:
   /productos:
     get:
       summary: Obtener todos los productos
-      description: Devuelve una lista de productos con nombre, precio, código e imagen. Se puede aplicar un filtro por nombre.
+      description: Devuelve una lista de productos con nombre, precio, código e imagen_url. Se puede aplicar un filtro por nombre.
       parameters:
         - name: nombre
           in: query
@@ -30,6 +30,8 @@ paths:
                   $ref: '#/components/schemas/Producto'
         '204':
           description: No se encontraron productos con ese filtro
+        '405':
+          description: Método no permitido
         '500':
           description: Error interno
 
@@ -52,6 +54,8 @@ paths:
                 $ref: '#/components/schemas/Producto'
         '404':
           description: Producto no encontrado
+        '405':
+          description: Método no permitido
 
 components:
   schemas:
@@ -65,6 +69,6 @@ components:
         precio:
           type: number
           format: float
-        imagen:
+        imagen_url:
           type: string
           format: uri
