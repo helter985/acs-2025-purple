@@ -12,6 +12,7 @@ def create_app():
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['JSON_AS_ASCII'] = False  # Permitir caracteres UTF-8 en JSON
     
     CORS(app)
     db.init_app(app)

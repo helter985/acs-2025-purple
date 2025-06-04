@@ -1,4 +1,5 @@
 from app.models.db import db
+import re
 
 class Producto(db.Model):
     __tablename__ = 'productos'
@@ -16,6 +17,8 @@ class Producto(db.Model):
             raise ValueError("El código es requerido")
         if not nombre:
             raise ValueError("El nombre es requerido")
+        if imagen_url and not self._es_url_valida(imagen_url):
+            raise ValueError("La URL de la imagen no es válida")
             
         self.codigo = codigo
         self.nombre = nombre
@@ -32,6 +35,18 @@ class Producto(db.Model):
             'precio': self.precio,
             'imagen_url': self.imagen_url
         }
+
+    @staticmethod
+    def _es_url_valida(url):
+        """Validar que la URL tenga un formato válido."""
+        patron_url = re.compile(
+            r'^https?://'  # http:// o https://
+            r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+[A-Z]{2,6}\.?|'  # dominio
+            r'localhost|'  # localhost
+            r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'  # IP
+            r'(?::\d+)?'  # puerto opcional
+            r'(?:/?|[/?]\S+)$', re.IGNORECASE)
+        return bool(patron_url.match(url))
 
     @staticmethod
     def obtener_todos(nombre=None):
