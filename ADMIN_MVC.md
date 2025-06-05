@@ -23,16 +23,16 @@ Este documento describe las funcionalidades, requerimientos y casos de prueba re
 
 ## 4. User Stories del Administrador
 
-- **US05**
+- **US01**
   > Como administrador, quiero poder cargar manualmente las imágenes de los productos desde el panel MVC, para que los vendedores las vean junto con los precios.
 
-- **US06**
+- **US02**
   > Como administrador, quiero mantener y configurar el sistema de actualización de precios desde el panel MVC, para que la aplicación siempre muestre la lista más reciente.
 
-- **US07**
+- **US03**
   > Como administrador, quiero poder subir y normalizar las listas de precios de los proveedores 1-2 veces por semana desde el panel MVC, para garantizar que la información esté actualizada y unificada.
 
-- **US08**
+- **US04**
   > Como administrador, quiero asegurarme de que la aplicación solo muestre la versión más reciente de la lista de precios, para evitar errores y confusiones en la venta.
 
 ## 5. Casos de Prueba del Administrador
