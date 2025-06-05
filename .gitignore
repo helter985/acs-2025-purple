@@ -8,10 +8,6 @@ utils/config.py
 .venv
 .env
 
-# Imágenes cargadas
-app/static/images/*
-!app/static/images/.gitkeep
-
 # Archivos temporales
 /tmp
 .DS_Store
