@@ -35,26 +35,3 @@ class Producto(db.Model):
             'precio': self.precio,
             'imagen_url': self.imagen_url
         }
-
-    @staticmethod
-    def _es_url_valida(url):
-        """Validar que la URL tenga un formato válido."""
-        patron_url = re.compile(
-            r'^https?://'  # http:// o https://
-            r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+[A-Z]{2,6}\.?|'  # dominio
-            r'localhost|'  # localhost
-            r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'  # IP
-            r'(?::\d+)?'  # puerto opcional
-            r'(?:/?|[/?]\S+)$', re.IGNORECASE)
-        return bool(patron_url.match(url))
-
-    @staticmethod
-    def obtener_todos(nombre=None):
-        query = Producto.query
-        if nombre:
-            query = query.filter(Producto.nombre.ilike(f'%{nombre}%'))
-        return query.all()
-    
-    @staticmethod
-    def obtener_por_codigo(codigo):
-        return Producto.query.filter_by(codigo=codigo).first() 
