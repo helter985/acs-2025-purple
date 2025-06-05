@@ -1,9 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
-import os
 
 from app.config import SECRET_KEY, DATABASE_URL
-from app.models.db import db, init_db
+from app.models.db import db
 
 def create_app():
     app = Flask(__name__)

@@ -4,10 +4,6 @@ __pycache__/
 build/
 utils/config.py
 
-# Doc
-tests/README.md
-BACKEND_README.md
-
 # Entorno
 .venv
 .env
