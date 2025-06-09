@@ -7,6 +7,8 @@ utils/config.py
 # Entorno
 .venv
 .env
+venv/
+
 
 # Archivos temporales
 /tmp

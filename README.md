@@ -1,4 +1,83 @@
 # Test Plan - Consulta de Lista de Precios - Purple
+# Requisitos
+
+* Python 3.11+
+* PostgreSQL (con base de datos creada previamente)
+* pgAdmin 4 (opcional para administración visual)
+
+---
+
+## Instalación
+
+1. **Clonar el repositorio**
+
+```bash
+git clone https://github.com/helter985/acs-2025-purple.git
+cd acs-2025-purple
+```
+
+2. **Crear y activar el entorno virtual**
+
+```bash
+python -m venv venv
+venv\Scripts\activate  # En Linux/macOS: source venv/bin/activate
+```
+
+3. **Instalar dependencias**
+
+```bash
+pip install -r requirements.txt
+```
+
+4. **Configurar variables de entorno**
+
+Copiar el archivo `.env.example` y renombrarlo como `.env`:
+
+```bash
+copy .env_example .env  # En Linux/macOS: cp .env_example .env
+```
+
+Luego completar las variables necesarias en `.env` según el entorno
+
+
+4. **Ejecutar la aplicación**
+
+```bash
+python app.py
+```
+
+5. **(Opcional) Ejecutar los tests**
+
+```bash
+python -m unittest discover -s tests
+```
+
+---
+
+## Estructura del Proyecto
+
+```
+acs-2025-purple/
+├── app/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── models/
+│   ├── routes/
+│   ├── services/
+│   └── tests/
+│       ├── __init__.py
+│       ├── test_producto_routes.py
+│       └── test_producto_service.py
+├── venv/
+├── .env.example
+├── .gitignore
+├── ADMIN_MVC.md
+├── app.py
+├── init_db.py
+├── openapi.yaml
+├── README.md
+└── requirements.txt
+```
 
 ## 1. Introducción
 
